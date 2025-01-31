@@ -1,4 +1,4 @@
-import {easeOut, useScroll, useTransform, motion } from 'framer-motion';
+import {useScroll, useTransform, motion } from 'framer-motion';
 import Nav from './Nav';
 import { useContext } from 'react';
 import { pageContext, pageContextType } from '../Contexts/PageContext';
@@ -7,12 +7,15 @@ import Profile from './Profile';
 import MyPosts from './MyPosts';
 import { profileContext } from '../Contexts/ProfileContext';
 import Auth from './Auth/Auth';
+import { changingContext } from '../Contexts/Changing';
+import ChangingModal from './ChangingModal';
 
 
 const MainContent = () => {
 
   const {page} = useContext<pageContextType>(pageContext)
   const {profile} = useContext<profileContext>(profileContext)
+  const {isChanging, changingId} = useContext<changingContext>(changingContext)
 
   const {scrollY} = useScroll()
 
@@ -45,10 +48,11 @@ const MainContent = () => {
     >
       <div className='flex justify-center items-center w-full h-[86%] absolute bottom-0 left-0'>
         <div className='bg-gray-900 w-[95%] h-[95%] rounded-3xl glowMini overflow-hidden'>
-      {renderPage(page)}
+            {renderPage(page)}
         </div>
       </div>
       <Nav/> 
+      {isChanging && <ChangingModal id={changingId}/>}
     </motion.div>
   )
 }

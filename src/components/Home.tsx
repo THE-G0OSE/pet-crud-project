@@ -17,7 +17,7 @@ const Home = () => {
     <motion.div className='flex flex-col items-center gap-y-8 pt-8'
       style={{y}} 
     >
-      {posts.map((post) => <Post key={post.id} title={post.title} description={post.description} creator={post.creator} />)}
+      {posts.map((post) => <Post key={post.id} id={post.id} title={post.title} description={post.description} creator={post.creator} />)}
     </motion.div>
 
   )
