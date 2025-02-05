@@ -12,3 +12,6 @@
 .glowMini{
     box-shadow: 0 0 15px 3px white;
 }
+.scrolloff::webkit-scrollbar {
+    width: 0px;
+}

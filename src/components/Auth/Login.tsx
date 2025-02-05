@@ -24,8 +24,13 @@ const Login: FC<props> = ({setPhase}) => {
   const submity = (data: form)  => {
     const result = db.db.filter((user) => {if(user.email === data.email) return user})
     if(result.length > 0) {
+      if ( data.password === result[0].password){
+
       setError('')
       profile.set({...result[0], isLogin: true})
+      } else {
+        setError('password doesn\'t match')
+      }
     } else {
       setError('accout doesn\'t exist')
     }

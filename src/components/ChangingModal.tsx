@@ -56,8 +56,8 @@ const ChangingModal:React.FC<props> = ({id}) => {
                 </div>
                 {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
                 <div className='flex justify-between items-center w-[700px]'>
-                    <button className='w-[320px] h-[50px] rounded-full bg-gray-600' type='submit'>Change</button>
                     <button className='w-[320px] h-[50px] rounded-full bg-gray-600' onClick={() => setIsChanging(false)} type='button'>Back</button>
+                    <button className='w-[320px] h-[50px] rounded-full bg-gray-600' type='submit'>Change</button>
                 </div>
             </form>
         </div>

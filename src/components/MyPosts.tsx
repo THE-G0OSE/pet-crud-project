@@ -1,4 +1,5 @@
-import { useContext, useRef } from "react";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useContext } from "react";
 import { useForm } from "react-hook-form"
 import { DB, DBcontext } from "../Contexts/DBContext";
 import { profileContext } from "../Contexts/ProfileContext";
@@ -7,9 +8,6 @@ const MyPosts = () => {
 
   const {posts, setPosts} = useContext<DB>(DBcontext)
   const {profile} = useContext<profileContext>(profileContext)
-
-  const titleInput = useRef<HTMLInputElement | null>(null)
-  const DescInput = useRef<HTMLTextAreaElement | null>(null)
 
   type form = {
     title: string;
@@ -30,28 +28,71 @@ const MyPosts = () => {
     }
   }
 
+  const mainVariants = {
+    initial: {y: 200, opacity: 0},
+    animate: {y: 0, opacity: 1, transition: { duration: 2, delay: 2.2, ease: 'easeInOut'}},
+    exit: {y: 200, opacity: 0, transition: {duration: 1, ease: 'easeInOut'}}
+  }
+
+  const titleVariants = {
+    initial: {x: 200, opacity: 0},
+    animate: {x: 0, opacity: 1, transition: {duration: 1.2, delay: 4.2, ease: 'easeInOut'}},
+    exit: {x: 200, opacity: 0, transition: {duration: 1, ease: 'easeIn'}},
+  }
+
+  const DescriptionVariants = {
+    initial: {x: -200, opacity: 0},
+    animate: {x: 0, opacity: 1, transition: {duration: 1.2, delay: 4.5, ease: 'easeInOut'}},
+    exit: {x: -200, opacity: 0, transition: {duration: 1, ease: 'easeIn'}},
+  }
+
+  const buttonVariants = {
+    initial: {x: 200, opacity: 0},
+    animate: {x: 0, opacity: 1, transition: {duration: 1.2, delay: 4.8, ease: 'easeInOut'}},
+    exit: {x: 200, opacity: 0, transition: {duration: 1, ease: 'easeIn'}},
+  }
+
   return (
 
-    <div className='size-full flex justify-center items-center'>
-      <form className='flex flex-col items-center justify-between w-[700px] py-[30px] h-[500px] rounded-2xl bg-gray-800' onSubmit={handleSubmit(submity)}>
-        <div className='w-[500px] h-[70px]'>
-          <div className='w-full px-3 flex justify-between items-center rounded-2xl h-[50px] bg-gray-700 text-gray-200'>
+    <motion.div key='newPost' className='h-[800px] w-[1800px] flex justify-center items-center bg-none fixed'>
+      <AnimatePresence propagate>
+      <motion.form key='form' className='flex flex-col items-center justify-between w-[700px] py-[30px] h-[500px] rounded-2xl bg-gray-800' onSubmit={handleSubmit(submity)}
+        variants={mainVariants}
+        initial='initial'
+        animate='animate'
+        exit='exit'
+      >
+        <AnimatePresence propagate>
+        <div key='title' className='w-[500px] h-[70px]'>
+          <AnimatePresence propagate>
+          <motion.div className='w-full px-3 flex justify-between items-center rounded-2xl h-[50px] bg-gray-700 text-gray-200'
+            variants={titleVariants}
+          >
             <label htmlFor="title">Title: </label> <input  onInput={noMore} className='w-[430px] outline-none' id='title' type="text" {...register('title', {required: 'Post must have a title', minLength: {value: 4, message: 'Title must be at least 4 characters'}})} />
-          </div>
+          </motion.div>
+          </AnimatePresence>
           {errors.title && <p className='text-red-500'>{errors.title.message}</p>}
         </div>
         <div className='w-[500px] h-[250px] '>
-          <div className='w-full p-[15px] flex flex-col justify-between items-start rounded-2xl h-full bg-gray-700 text-gray-200'>
+          <AnimatePresence propagate>
+          <motion.div className='w-full p-[15px] flex flex-col justify-between items-start rounded-2xl h-full bg-gray-700 text-gray-200'
+            variants={DescriptionVariants} 
+          >
             <label htmlFor="description">Description: </label> <textarea className='w-[470px] resize-none h-[200px] outline-none' id='description' {...register('description', {required: 'Post must have a description', minLength: {value: 10, message: 'Description must be at least 10 characters'}})} />
-          </div>
+          </motion.div>
+          </AnimatePresence>
           {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
         </div>
 
-        <button className='w-[500px] h-[50px] rounded-2xl bg-gray-600 text-gray-200' type="submit">{isSubmitting ? 'Posting...' : 'Post'}</button>
+        <motion.button className='w-[500px] h-[50px] rounded-2xl bg-gray-600 text-gray-200' type="submit"
+          variants={buttonVariants} 
+        >{isSubmitting ? 'Posting...' : 'Post'}</motion.button>
+        </AnimatePresence>
 
-      </form>
+      </motion.form>
+      </AnimatePresence>
 
-    </div>
+    </motion.div>
 
   )
 

@@ -1,4 +1,4 @@
-import {easeOut, motion, useScroll, useTransform} from 'framer-motion'
+import {motion, useScroll, useTransform} from 'framer-motion'
 import MainContent from './MainContent'
 
 const Main = () => {

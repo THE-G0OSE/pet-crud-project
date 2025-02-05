@@ -1,3 +1,4 @@
+import {motion} from 'framer-motion'
 import { useState } from 'react'
 import Choice from './Choice'
 import Login from './Login'
@@ -16,14 +17,13 @@ const Auth = () => {
         case 'register':
           return <Registration setPhase={setPhase}/>
       }
+
     }
 
   return (
-
-    <div className='size-full'>
+    <motion.div key='auth' className='size-full'>
       {renderPage(phase)}
-    </div>
-
+    </motion.div>
   )
 
 }

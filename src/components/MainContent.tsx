@@ -1,6 +1,6 @@
-import {useScroll, useTransform, motion } from 'framer-motion';
+import {useScroll, useTransform, motion, AnimatePresence } from 'framer-motion';
 import Nav from './Nav';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { pageContext, pageContextType } from '../Contexts/PageContext';
 import Home from './Home';
 import Profile from './Profile';
@@ -13,6 +13,13 @@ import ChangingModal from './ChangingModal';
 
 const MainContent = () => {
 
+    const [changing, setChanging] = useState<boolean>(false)
+
+  const pageVariants = {
+    initial: {y: 0},
+    move: {y: 700}
+  }
+
   const {page} = useContext<pageContextType>(pageContext)
   const {profile} = useContext<profileContext>(profileContext)
   const {isChanging, changingId} = useContext<changingContext>(changingContext)
@@ -24,19 +31,19 @@ const MainContent = () => {
   const renderPage = (pageName: 'home' | 'profile' | 'my') => {
     switch(pageName) {
       case 'home':
-        return <Home/>
+        return <Home key='homeElement'/>
       case 'profile': 
         if (profile.isLogin){
-          return <Profile/>
+          return <Profile key='profileElement'/>
         } else {
-          return <Auth/>
+          return <Auth key='authElement'/>
         }
 
       case 'my': 
         if (profile.isLogin){
-          return <MyPosts/>
+          return <MyPosts key='myElement'/>
         } else {
-        return <Auth/>
+        return <Auth key='authElement'/>
         }
     }
   }
@@ -47,11 +54,18 @@ const MainContent = () => {
       style={{x}}
     >
       <div className='flex justify-center items-center w-full h-[86%] absolute bottom-0 left-0'>
-        <div className='bg-gray-900 w-[95%] h-[95%] rounded-3xl glowMini overflow-hidden'>
+        <motion.div id='hui' className='bg-gray-900 w-[95%] h-[95%] rounded-3xl glowMini overflow-hidden relative'
+          variants={pageVariants} 
+          initial='initial'
+          animate={changing ? 'move': 'initial'}
+          transition={{duration: 1.5, ease: 'easeInOut', type: 'spring', stiffness: 50}}
+        >
+          <AnimatePresence>
             {renderPage(page)}
-        </div>
+          </AnimatePresence>
+        </motion.div>
       </div>
-      <Nav/> 
+      <Nav changing={{get: changing, set: setChanging}}/> 
       {isChanging && <ChangingModal id={changingId}/>}
     </motion.div>
   )

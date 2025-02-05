@@ -25,16 +25,16 @@ const Post: FC<props> = ({title, description, creator, id}) => {
         setIsChanging(true)
     }
 
-  return ( 
+  return (
 
-    <div className='flex flex-col w-[1000px] max-h-[500px] bg-gray-800 rounded-2xl p-8 overflow-scroll relative'>
+    <div className='flex flex-col w-[1000px] max-h-[500px] bg-gray-800 rounded-2xl p-8 overflow-y-scroll relative scrolloff'>
     <div className='h-26'>
       {creatorData!.profileImage !== '' && <div className='inline-block w-[60px] h-[75px] bg-gray-700 rounded-xl overflow-hidden'><img className='object-cover size-full' src={creatorData!.profileImage} alt="fuck" /></div>}
       <p className='text-gray-400 text-2xl inline ml-4 absolute '>{creatorData!.username}</p>
       <p className='text-gray-200 text-3xl inline absolute ml-20 mt-14 font-bold'>{title}</p>
     </div>
       <p className='text-gray-300 text-2xl mt-5'>{description}</p>
-      {profile.profile.id === creator && <button onClick={modalOpen} className='absolute right-6 top-6 bg-gray-700 p-2 rounded-xl'><MdEdit className='text-gray-200 text-2xl'/></button>}
+      {profile.profile.id === creator && <button onClick={modalOpen} className='absolute right-9 top-9 bg-gray-700 p-2 rounded-xl'><MdEdit className='text-gray-200 text-2xl'/></button>}
     </div>
 
   )
