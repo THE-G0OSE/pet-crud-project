@@ -50,26 +50,42 @@ const Registration: FC<props> = ({setPhase}) => {
 
   return (
 
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-center items-center size-full'>
-      <label htmlFor="username" className='w-[600px] h-[100px] p-3'>
+    <motion.form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-center items-center size-full'
+      initial={{opacity: 0, y: 0}} 
+      animate={{opacity: 1, y: 0, transition: {duration: 1, delay: 2, ease: 'easeInOut'}}}
+      exit={{opacity: 0, y: 100, transition: {duration: 1, ease: 'easeInOut'}}}
+    >
+      <motion.label htmlFor="username" className='w-[600px] h-[100px] p-3'
+        initial={{x: 100, opacity: 0}} 
+        animate={{x: 0, opacity: 1, transition: {duration: 1, delay: 2, ease: 'easeInOut'}}}
+      >
         <div className='bg-gray-800 p-3 rounded-2xl font-bold flex justify-between items-center'><span className='text-white' >Username: </span>
         <input className='font-light text-white outline-none w-[440px]' id='username' type="text" {...register('username', {required: 'Username is required'})} /></div>
         {errors.username && <p className='text-red-500'>{errors.username.message}</p>}
-      </label>
-      <label htmlFor="email" className='w-[600px] h-[100px] p-3'>
+      </motion.label>
+      <motion.label htmlFor="email" className='w-[600px] h-[100px] p-3'
+        initial={{x: -100, opacity: 0}} 
+        animate={{x: 0, opacity: 1, transition: {duration: 1, delay: 2.2, ease: 'easeInOut'}}}
+      >
         <div className='bg-gray-800 p-3 rounded-2xl font-bold flex justify-between items-center'><span className='text-white' >Email: </span>
         <input className='font-light text-white outline-none w-[500px]' id='email' type="email" {...register('email', {required: 'Email is required'})} /></div>
         {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
-      </label>
-      <label htmlFor="password" className='w-[600px] h-[100px] p-3'>
+      </motion.label>
+      <motion.label htmlFor="password" className='w-[600px] h-[100px] p-3'
+        initial={{x: 100, opacity: 0}} 
+        animate={{x: 0, opacity: 1, transition: {duration: 1, delay: 2.4, ease: 'easeInOut'}}}
+      >
         <div className='bg-gray-800 p-3 rounded-2xl font-bold flex justify-between items-center'><span className='text-white' >Password: </span>
         <div className='inline-flex justify-between items-center'>
           <input className='font-light text-white outline-none w-[400px]' id='password' type={showPass ? 'text' : 'password'} {...register('password', {required: 'Password is required', minLength: {value: 8, message: 'Password must be at least 8 characters'}})} /></div>
           <button onClick={() => setShowPass(!showPass)} type='button' className='inline-flex justify-center items-center'>{showPass ? <LuEyeClosed className='text-2xl text-white' /> : <LuEye className='text-2xl text-white'/>}</button>
         </div>
         {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
-      </label>
-      <label htmlFor="repeat" className='w-[600px] h-[100px] p-3'>
+      </motion.label>
+      <motion.label htmlFor="repeat" className='w-[600px] h-[100px] p-3'
+        initial={{x: -100, opacity: 0}} 
+        animate={{x: 0, opacity: 1, transition: {duration: 1, delay: 2.6, ease: 'easeInOut'}}}
+      >
         <div className='bg-gray-800 p-3 rounded-2xl font-bold flex justify-between items-center'><span className='text-white' >Repeat password: </span>
         <div className='inline-flex justify-between items-center'>
           <input className='font-light text-white outline-none w-[350px]' id='repeat' type={showRepeat ? 'text' : 'password'} {...register('repeat', {required: 'Repeat password'})} /></div>
@@ -77,12 +93,18 @@ const Registration: FC<props> = ({setPhase}) => {
         </div>       
         {errors.repeat && <p className='text-red-500'>{errors.repeat.message}</p>}
         {errorState !== '' && <p className='text-red-500'>{errorState}</p>}
-      </label>
+      </motion.label>
       <div className='flex justify-between w-[580px]'>
-        <button onClick={back} className='m-t-4 text-white h-[50px] w-[270px] bg-gray-800 rounded-2xl' type='button'>Back</button>
-        <button className='m-t-4 text-white h-[50px] w-[270px] bg-gray-700 rounded-2xl' type='submit'>{isSubmitting ? 'Loading...' : 'Register'}</button>
+        <motion.button onClick={back} className='m-t-4 text-white h-[50px] w-[270px] bg-gray-800 rounded-2xl' type='button'
+          initial={{y: 50, opacity: 0}} 
+          animate={{y:0, opacity: 1, transition: {duration: 1, delay: 2.8, ease: 'easeInOut'}}}
+        >Back</motion.button>
+        <motion.button className='m-t-4 text-white h-[50px] w-[270px] bg-gray-700 rounded-2xl' type='submit'
+          initial={{y: 50, opacity: 0}} 
+          animate={{y:0, opacity: 1, transition: {duration: 1, delay: 3, ease: 'easeInOut'}}}
+        >{isSubmitting ? 'Loading...' : 'Register'}</motion.button>
       </div>
-    </form>
+    </motion.form>
 
   )
 
