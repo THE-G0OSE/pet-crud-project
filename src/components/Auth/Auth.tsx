@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {AnimatePresence, motion} from 'framer-motion'
 import { useState } from 'react'
 import Choice from './Choice'
 import Login from './Login'
@@ -11,18 +11,24 @@ const Auth = () => {
     const renderPage = (page: 'choice' | 'register' | 'login') => {
       switch(page){
         case 'choice':
-          return <Choice setPhase={setPhase}/>
+          return <Choice key='choice' setPhase={setPhase}/>
         case 'login':
-          return <Login setPhase={setPhase}/>
+          return <Login key='login' setPhase={setPhase}/>
         case 'register':
-          return <Registration setPhase={setPhase}/>
+          return <Registration key='register' setPhase={setPhase}/>
       }
 
     }
 
   return (
-    <motion.div key='auth' className='size-full'>
-      {renderPage(phase)}
+    <motion.div key='auth' className='size-full'
+      initial={{ opacity: 0}} 
+      animate={{ opacity:1 , transition: {duration: 1, delay: 2, ease: 'easeInOut'}}}
+      exit={{ opacity: 0, transition: {duration: 1, ease: 'easeInOut'}}}
+    >
+      <AnimatePresence>
+        {renderPage(phase)}
+      </AnimatePresence>
     </motion.div>
   )
 

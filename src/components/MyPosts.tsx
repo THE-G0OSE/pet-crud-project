@@ -62,9 +62,9 @@ const MyPosts = () => {
         animate='animate'
         exit='exit'
       >
-        <AnimatePresence propagate>
+        <AnimatePresence>
         <div key='title' className='w-[500px] h-[70px]'>
-          <AnimatePresence propagate>
+          <AnimatePresence>
           <motion.div className='w-full px-3 flex justify-between items-center rounded-2xl h-[50px] bg-gray-700 text-gray-200'
             variants={titleVariants}
           >
@@ -74,7 +74,7 @@ const MyPosts = () => {
           {errors.title && <p className='text-red-500'>{errors.title.message}</p>}
         </div>
         <div className='w-[500px] h-[250px] '>
-          <AnimatePresence propagate>
+          <AnimatePresence>
           <motion.div className='w-full p-[15px] flex flex-col justify-between items-start rounded-2xl h-full bg-gray-700 text-gray-200'
             variants={DescriptionVariants} 
           >

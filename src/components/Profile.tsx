@@ -80,11 +80,11 @@ const Profile = () => {
 
   return (
 
-    <motion.div key='profileBody' className='overflow-hidden w-[1800.5px] h-[791px] fixed'
+    <motion.div key='profileBody' className='overflow-hidden size-full'
       exit={{opacity: 0, transition:{duration: 1}}}
     >
-      <AnimatePresence propagate>
-    <div className='size-full relative top-0 left-0 overflow-hidden rounded-3xl'>
+      <AnimatePresence>
+    <div className='relative top-0 left-0 overflow-hidden size-full rounded-3xl'>
       <AnimatePresence propagate>
         <motion.div key='banner' className='w-full h-[150px] relative overflow-hidden'
           variants={bannerVariants} 
@@ -93,7 +93,7 @@ const Profile = () => {
           exit='initial'
         >
           <img src={profile.bannerImage == '' ? 'https://placeholder.apptor.studio/500/200/banner.png' : profile.bannerImage} alt="noImage" className='object-cover size-full'/>
-          <AnimatePresence propagate>
+          <AnimatePresence>
             {isEditing && <motion.label key='profileEdit' htmlFor='bannerfile' className='p-0.5 w-[40px] cursor-pointer block bg-gray-900 rounded-xl absolute right-[100px] top-[115px]'
             variants={editVariants} 
             initial='initial'
@@ -111,7 +111,7 @@ const Profile = () => {
           exit='initial'
         >
           <img src={profile.profileImage == '' ? 'https://placeholder.apptor.studio/500/200/banner.png' : profile.profileImage} alt="noImage" className='object-cover size-full'/>
-          <AnimatePresence propagate>
+          <AnimatePresence>
             {isEditing && <motion.label key='bannerEdit' htmlFor='profilefile' className='p-0.5 w-[40px] cursor-pointer block bg-gray-900 rounded-xl absolute right-[10px] top-[150px]'
               variants={editVariants} 
               initial='initial'
