@@ -14,9 +14,9 @@ const Choice: FC<props> = ({setPhase}) => {
       <AnimatePresence>
         <motion.div className='w-[399px] h-[100px] bg-gray-800 rounded-full flex justify-center items-center text-4xl text-gray-100 glowMini'
           onClick={() => setPhase('login')} 
-          initial={{x: 200}} 
-          animate={{x: 0, transition: {duration: 1, delay: 2, ease: 'easeInOut'}}}
-          exit={{x: 200, transition: {duration: 1, ease: 'easeInOut'}}}
+          initial={{y: 100}} 
+          animate={{y: 0, transition: {duration: 1, delay: 2, ease: 'easeInOut'}}}
+          exit={{y: 100, transition: {duration: 1, ease: 'easeInOut'}}}
 
         >
             Sign in
