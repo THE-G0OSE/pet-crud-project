@@ -54,7 +54,7 @@ const MainContent = () => {
       style={{x}}
     >
       <div className='flex justify-center items-center w-full h-[86%] absolute bottom-0 left-0'>
-        <motion.div id='hui' className='bg-gray-900 w-[95%] h-[95%] rounded-3xl glowMini overflow-hidden relative'
+        <motion.div id='hui' className='bg-gray-900 w-[95%] h-[95%] rounded-3xl glowMini overflow-hidden'
           variants={pageVariants} 
           initial='initial'
           animate={changing ? 'move': 'initial'}
