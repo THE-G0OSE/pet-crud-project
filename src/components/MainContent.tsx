@@ -66,7 +66,9 @@ const MainContent = () => {
         </motion.div>
       </div>
       <Nav changing={{get: changing, set: setChanging}}/> 
+      <AnimatePresence>
       {isChanging && <ChangingModal id={changingId}/>}
+      </AnimatePresence>
     </motion.div>
   )
 }

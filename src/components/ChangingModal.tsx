@@ -40,27 +40,47 @@ const ChangingModal:React.FC<props> = ({id}) => {
 
   return (
 
-    <motion.div className='w-screen h-screen fixed flex justify-center items-center top-0 left-0'>
-        <div className='bg-black size-full opacity-50 fixed top-0 left-0'></div>
-        <div className='absolute w-[1000px] h-[700px] flex justify-center items-center bg-gray-700 rounded-3xl text-gray-200'>
+    <motion.div className='fixed top-0 left-0 flex items-center justify-center w-screen h-screen'
+        exit={{opacity: 0}} 
+    >
+        <motion.div className='fixed top-0 left-0 bg-black opacity-50 size-full'
+            initial={{opacity: 0}} 
+            animate={{opacity: .5, transition: {duration: 1}}}
+        ></motion.div>
+        <motion.div className='absolute w-[1000px] h-[700px] flex justify-center items-center bg-gray-700 rounded-3xl text-gray-200'
+            initial={{y: -300, opacity: 0}}  
+            animate={{y: 0, opacity: 1, transition: {duration: 1.5, delay: .4, ease: 'easeInOut'}}}
+        >
             <form className='flex justify-between items-center flex-col h-[90%]' onSubmit={handleSubmit(submity)}>
                 <div className='w-[700px] h-[80px]'>
-                    <div className='h-[50px] w-full bg-gray-800 rounded-full flex items-center px-6'>
+                    <motion.div className='h-[50px] w-full bg-gray-800 rounded-full flex items-center px-6'
+                        initial={{y: 50, opacity: 0}} 
+                        animate={{y: 0, opacity: 1, transition: {duration: 1, delay: 1, ease: 'easeInOut'}}}
+                    >
                       <label htmlFor="title">Title:</label><input className='ml-3 outline-none w-[600px]' type="text" id='title' {...register('title', {required: 'Title is required', minLength:{value: 4, message: 'Title must be at least 4 characters'}})} />
-                    </div>
+                    </motion.div>
                     {errors.title && <p className='text-red-500'>{errors.title.message}</p>}
                 </div>
-                <div className='w-[700px] h-[420px] bg-gray-800 rounded-2xl p-4 '>
+                <motion.div className='w-[700px] h-[420px] bg-gray-800 rounded-2xl p-4 '
+                    initial={{y: 50, opacity: 0}} 
+                    animate={{y: 0, opacity: 1, transition: {duration: 1, delay: 1.2, ease: 'easeInOut'}}}
+                >
                     <label htmlFor="description">Description:</label>
                     <textarea className='h-[400px] block ml-3 outline-none w-[600px] resize-none' id='description' {...register('description', {required: 'Description is required', minLength:{value: 10, message: 'Descrition must be at least 10 characters'}})} />
-                </div>
+                </motion.div>
                 {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
                 <div className='flex justify-between items-center w-[700px]'>
-                    <button className='w-[320px] h-[50px] rounded-full bg-gray-600' onClick={() => setIsChanging(false)} type='button'>Back</button>
-                    <button className='w-[320px] h-[50px] rounded-full bg-gray-600' type='submit'>Change</button>
+                    <motion.button className='w-[320px] h-[50px] rounded-full bg-gray-600' onClick={() => setIsChanging(false)} type='button'
+                        initial={{x: -100, opacity: 0}}     
+                        animate={{x: 0, opacity: 1, transition: {duration: 1, delay: 1.4, ease: 'easeInOut'}}}
+                    >Back</motion.button>
+                    <motion.button className='w-[320px] h-[50px] rounded-full bg-gray-600' type='submit'
+                        initial={{x: 100, opacity: 0}} 
+                        animate={{x: 0, opacity: 1, transition: {duration: 1, delay: 1.6, ease: 'easeInOut'}}}
+                    >Change</motion.button>
                 </div>
             </form>
-        </div>
+        </motion.div>
     </motion.div>
 
   )
