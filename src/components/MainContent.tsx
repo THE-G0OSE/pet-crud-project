@@ -9,6 +9,8 @@ import { profileContext } from '../Contexts/ProfileContext';
 import Auth from './Auth/Auth';
 import { changingContext } from '../Contexts/Changing';
 import ChangingModal from './ChangingModal';
+import { PopUp, popup } from '../Contexts/PopUpContext';
+import PopUpHint from './PopUpHint';
 
 
 const MainContent = () => {
@@ -23,12 +25,14 @@ const MainContent = () => {
   const {page} = useContext<pageContextType>(pageContext)
   const {profile} = useContext<profileContext>(profileContext)
   const {isChanging, changingId} = useContext<changingContext>(changingContext)
+  const {phase} = useContext<popup>(PopUp)
 
   const {scrollY} = useScroll()
 
   const x = useTransform(scrollY, [0, 1300], [-2280, 0])
     
   const renderPage = (pageName: 'home' | 'profile' | 'my') => {
+
     switch(pageName) {
       case 'home':
         return <Home key='homeElement'/>
@@ -68,6 +72,7 @@ const MainContent = () => {
       <Nav changing={{get: changing, set: setChanging}}/> 
       <AnimatePresence>
       {isChanging && <ChangingModal id={changingId}/>}
+      {(phase == 'start') && <PopUpHint/>}
       </AnimatePresence>
     </motion.div>
   )
